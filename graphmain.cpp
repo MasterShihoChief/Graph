@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include<stdio.h>
 #include<vector>
+#include <algorithm>
 #include "Digraph.cpp"
 using namespace std;
 
@@ -87,29 +88,32 @@ else
 				}
 ifile>>vertexNum;
 Digraph.initialize(vertexNum);
-ifile.get();
-ifile.get();
 while(ifile)
 	{
 	ifile>>x;
 	ifile>>y;
 	ifile>>w;
 	Digraph.insert(x,y,w);
+	ifile.ignore();
 	if(ifile.peek()=='\n')
 	{
+		cout<<"print function"<<endl;
 		Digraph.print(ofile);
-		//Digraph.Dijkstra();
 		goto outputloop;
 	}
+	}
 outputloop:	
-	while(ifile.peek()=='\n')
+	while(ifile)
 		{
 		ifile.get();
-		ifile.get();
 		ifile>>x;
+		Digraph.setSource(x);
+		Digraph.read();
+		Digraph.dijkstra();
+		Digraph.output(ofile);
 		//return shortest path from x to all vertices
 		}
 	}
-	}
+	cout<<"No runtime errors detected! Please check your specified output file for output."<<endl;
 return 0;
 }

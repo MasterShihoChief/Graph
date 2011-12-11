@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include<stdio.h>
 #include<vector>
+#include <algorithm>
 #define INFINITY 999
 using namespace std;
 
@@ -16,6 +17,7 @@ public:
   {
     // by standard we can't create zero-element array, so 
     // we create with one element since it won't matter.
+	cout<<"constructor"<<endl;
     digraphVector.clear();
 	predecessor.clear();
 	distance.clear();
@@ -28,23 +30,28 @@ public:
   //here we will resize the vector with the number of vertices given, since we will know the vertices at this time.
   void initialize (int n)
   {
-    digraphVector.reserve(n);
+	cout<<"initialization"<<endl;
+	digraphVector.resize(n);
 	numOfVertices=n;
-	predecessor.reserve(n);
-	distance.reserve(n);
-	mark.reserve(n);
+	predecessor.resize(n);
+	distance.resize(n);
+	mark.resize(n);
+	adjMatrix.resize(numOfVertices, vector <int>(numOfVertices,INFINITY));
 	//for (it=digraphVector.begin() ; it<digraphVector.end() ; it++)
       //digraphVector.insert(it, 0);
   }
-  
+void setSource(int x)
+{
+source=x;
+}  
 bool insert(int x, int y, int w);
 void print(ofstream &ofile);
 void read();
 void initialize();
 int getClosestUnmarkedNode();
 void dijkstra();
-void output();
-void printPath(int);
+void output(ofstream &ofile);
+void printPath(int,ofstream &ofile);
 protected:
 int numOfVertices;
 int source;
