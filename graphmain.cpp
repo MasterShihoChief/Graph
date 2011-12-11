@@ -3,7 +3,8 @@
 #include <fstream>
 #include <cstdlib>
 #include<stdio.h>
-#include "Digraph.h"
+#include<vector>
+#include "Digraph.cpp"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -59,6 +60,7 @@ cout<<"@@                c8OOOOOO8c                                             
 cout<<"@@               .CO8OOOOO8C                                                                                                                         C"<<endl;
 cout<<"@@               cC:      oO.                                                                                                                        C"<<endl;
 cout<<"@@...................................................................................................................................................C"<<endl;
+Digraph Digraph;
 int vertexNum=0;
 int x = 0;
 int y = 0;
@@ -83,13 +85,31 @@ else
 				cerr << "Error: could not open input file <" << argv[2] << ">" << endl;
 				exit(1); // error
 				}
-	
+ifile>>vertexNum;
+Digraph.initialize(vertexNum);
+ifile.get();
+ifile.get();
 while(ifile)
 	{
-	ifile>>vertexNum;
-	DigraphVector.reserve(vertexNum);
 	ifile>>x;
 	ifile>>y;
 	ifile>>w;
 	Digraph.insert(x,y,w);
-	
+	if(ifile.peek()=='\n')
+	{
+		Digraph.print(ofile);
+		//Digraph.Dijkstra();
+		goto outputloop;
+	}
+outputloop:	
+	while(ifile.peek()=='\n')
+		{
+		ifile.get();
+		ifile.get();
+		ifile>>x;
+		//return shortest path from x to all vertices
+		}
+	}
+	}
+return 0;
+}
