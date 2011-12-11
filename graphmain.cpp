@@ -97,8 +97,9 @@ while(ifile)
 	ifile.ignore();
 	if(ifile.peek()=='\n')
 	{
-		cout<<"print function"<<endl;
+		//cout<<"print function"<<endl;
 		Digraph.print(ofile);
+		ofile<<endl;
 		goto outputloop;
 	}
 	}

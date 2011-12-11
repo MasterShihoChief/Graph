@@ -17,7 +17,7 @@ public:
   {
     // by standard we can't create zero-element array, so 
     // we create with one element since it won't matter.
-	cout<<"constructor"<<endl;
+	//cout<<"constructor"<<endl;
     digraphVector.clear();
 	predecessor.clear();
 	distance.clear();
@@ -30,7 +30,7 @@ public:
   //here we will resize the vector with the number of vertices given, since we will know the vertices at this time.
   void initialize (int n)
   {
-	cout<<"initialization"<<endl;
+	//cout<<"initialization"<<endl;
 	digraphVector.resize(n);
 	numOfVertices=n;
 	predecessor.resize(n);
@@ -51,7 +51,7 @@ void initialize();
 int getClosestUnmarkedNode();
 void dijkstra();
 void output(ofstream &ofile);
-void printPath(int,ofstream &ofile);
+void printPath(int,int,ofstream &ofile);
 protected:
 int numOfVertices;
 int source;
@@ -59,6 +59,9 @@ vector<vector<int> >adjMatrix;
 vector<int> predecessor;
 vector<int> distance;
 vector<bool> mark;
+vector<int> path;
+vector<int>::iterator pathIt;
+vector<int> recurseDist;
 //int adjMatrix[15][15];
 //int predecessor[15],distance[15];
 //bool mark[15];
