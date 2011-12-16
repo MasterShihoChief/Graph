@@ -187,15 +187,14 @@ if(distance[i]!=999&&distance[i]!=0)
 
 void Digraph::output(ofstream &ofile)
 {
-for(int i=0;i<numOfVertices;i++) 
-{
+	int i =source;
 	ofile<<"source: "<<i<<endl<<endl;
 	for(int j=0;j<numOfVertices;j++)
 	{
-		
+		//ofile<<i<<" "<<j<<" "<<adjMatrix[i][j]<<endl;
 		if(i == j)
 		{
-		//DO NOTHING, we dont care about distance to its self
+		//DO NOTHING, we dont care about distance to its self"<<endl;
 		}
 		else if(predecessor[j] == -1)
 		ofile<<"No path from "<<i<<" to "<<j<<endl<<endl;
@@ -208,26 +207,29 @@ for(int i=0;i<numOfVertices;i++)
 		recurseDist.push_back(distance[j]);
 		printPath(i, j,ofile);
 		int pathSize=path.size();
-		for(true;pathSize!=0; pathSize--)
+		for(int z,y,x=i;pathSize!=0; pathSize--,x=z)
 			{
-				int z=path.back();
-				int y=recurseDist.back();
-				ofile<<i<< " to "<<z<<" of weight "<<y<<endl;
+				z=path.back();
+				y=recurseDist.back();
 				recurseDist.pop_back();
+				int w = recurseDist.back();
+				ofile<<x<< " to "<<z<<" of weight "<<y-w<<endl;
 				path.pop_back();
 			}
+		recurseDist.clear();
+		path.clear();
 		ofile<<endl;
 		}
 	}
-}
 }
 
 void Digraph::printPath(int i, int j, ofstream &ofile)
 {
 if(predecessor[j]>i)
 {
+		//cout<<"recurse"<<endl;
 		path.push_back(predecessor[j]);
-		recurseDist.push_back(distance[predecessor[j]]);
+		recurseDist.push_back(distance[j]-distance[predecessor[j]]);
 		printPath(i,predecessor[j],ofile);
 }
 

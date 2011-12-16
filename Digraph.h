@@ -43,7 +43,7 @@ public:
 void setSource(int x)
 {
 source=x;
-}  
+}
 bool insert(int x, int y, int w);
 void print(ofstream &ofile);
 void read();

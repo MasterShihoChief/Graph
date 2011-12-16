@@ -103,8 +103,9 @@ while(ifile)
 		goto outputloop;
 	}
 	}
-outputloop:	
-	while(ifile)
+outputloop:
+		int tmp=0;
+	while(ifile&&tmp<=vertexNum)
 		{
 		ifile.get();
 		ifile>>x;
@@ -114,7 +115,9 @@ outputloop:
 		Digraph.output(ofile);
 		//return shortest path from x to all vertices
 		}
+		
 	}
+		
 	cout<<"No runtime errors detected! Please check your specified output file for output."<<endl;
 return 0;
 }
