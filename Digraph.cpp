@@ -207,13 +207,23 @@ void Digraph::output(ofstream &ofile)
 		recurseDist.push_back(distance[j]);
 		printPath(i, j,ofile);
 		int pathSize=path.size();
+		bool weight=true;
 		for(int z,y,x=i;pathSize!=0; pathSize--,x=z)
 			{
 				z=path.back();
 				y=recurseDist.back();
 				recurseDist.pop_back();
+				if(weight==true)
+				{
+				ofile<<x<< " to "<<z<<" of weight "<<y<<endl;
+				weight=false;
+				}
+				else
+				{
 				int w = recurseDist.back();
-				ofile<<x<< " to "<<z<<" of weight "<<y-w<<endl;
+				recurseDist.back();
+				ofile<<x<< " to "<<z<<" of weight "<<distance[j]-w<<endl;
+				}
 				path.pop_back();
 			}
 		recurseDist.clear();
